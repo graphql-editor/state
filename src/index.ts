@@ -19,13 +19,13 @@ export const jsonGet = (prefix: string, key: string, defaultValue = {}): any =>
 
 export class SlothContainer<T extends {}> extends Container<Partial<T>> {
   prefix = "Slothking";
-  constructor(prefix?: string) {
+  constructor(prefix: string) {
     super();
     if (prefix) {
       this.prefix = prefix;
+      this.state = jsonGet(this.prefix, "storage", {});
     }
   }
-  state: Partial<T> = jsonGet(this.prefix, "storage", {});
   set = (state: Partial<T>) => {
     jsonSet(this.prefix, "storage", {
       ...(this.state as any),
